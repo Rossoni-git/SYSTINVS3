@@ -61,14 +61,24 @@ namespace SysTINSClass
             cmd.Connection.Close();
             return categoria;
 
-
-
-
-
-
+        }
+        //Método de obter lista da classe categoria
+        public static List<Categoria> ObterLista()
+        {
+            List<Categoria> lista = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "select * from niveis order by nome asc";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                lista.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
+            }
+            cmd.Connection.Close();
+            return lista;
         }
 
-        
-        
+
+
     }
 }
