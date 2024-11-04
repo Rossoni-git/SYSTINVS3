@@ -23,10 +23,10 @@ namespace SysTINSClass
 
         public int Produtoid { get; set; }
 
-        public Produto(){
+        public Produto() {
 
             Categoria = new();
-            }
+        }
 
         public Produto(string codbarras, string descricao, decimal vunidade, int minestoque,
             Categoria categoria, int desconto, string uvenda)
@@ -52,6 +52,23 @@ namespace SysTINSClass
             Codbarras = codbarras;
 
             Produtoid = produtoid;
+
+            Descricao = descricao;
+
+            Vunidade = vunidade;
+
+            Uvenda = uvenda;
+
+            Minestoque = minestoque;
+
+            Categoria = categoria;
+
+            Desconto = desconto;
+        }
+        public Produto( string descricao, decimal vunidade, string uvenda, Categoria categoria,
+         int minestoque, int desconto, string codbarras)
+        {
+            Codbarras = codbarras;
 
             Descricao = descricao;
 
@@ -105,12 +122,30 @@ namespace SysTINSClass
                         Categoria.ObterPorId(dr.GetInt32(6)),
                         dr.GetDecimal(6)
                         );
-              
-                   
+
+
             }
             return produto;
 
 
+
+        }
+        //Método atualizar terminado
+        public bool Atualizar()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_produoto_update";
+            cmd.Parameters.AddWithValue("spcod_barras", Codbarras);
+            cmd.Parameters.AddWithValue("spdescricao",Descricao );
+            cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
+            cmd.Parameters.AddWithValue("spcategoria_id", Categoria);
+            cmd.Parameters.AddWithValue("spestoque_minimo", Minestoque);
+            cmd.Parameters.AddWithValue("spcalsse_desconto", Desconto);
+
+
+            return cmd.ExecuteNonQuery() > 0 ? true : false;
         }
     }
+   
 }
