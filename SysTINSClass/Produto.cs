@@ -98,7 +98,7 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spdescricao", Descricao);
             cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
             cmd.Parameters.AddWithValue("spunidade_venda", Uvenda);
-            cmd.Parameters.AddWithValue("spcategoria_id", Categoria);
+            cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
             cmd.Parameters.AddWithValue("spestoque_minimo", Minestoque);
             cmd.Parameters.AddWithValue("spclasse_desconto", Desconto);
 
@@ -139,7 +139,7 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spcod_barras", Codbarras);
             cmd.Parameters.AddWithValue("spdescricao",Descricao );
             cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
-            cmd.Parameters.AddWithValue("spcategoria_id", Categoria);
+            cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
             cmd.Parameters.AddWithValue("spestoque_minimo", Minestoque);
             cmd.Parameters.AddWithValue("spcalsse_desconto", Desconto);
 
