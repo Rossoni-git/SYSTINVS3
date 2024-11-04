@@ -113,14 +113,13 @@ namespace SysTINSClass
             if (dr.Read())
             {
                 produto = new(
-                        dr.GetInt32(0),
-                        dr.GetInt32(1),
-                        dr.GetString(2),
-                        dr.GetString(3),
-                        dr.GetDecimal(4),
-                        dr.GetInt32(5),
-                        Categoria.ObterPorId(dr.GetInt32(6)),
-                        dr.GetDecimal(6)
+                        dr.GetString(0),
+                        dr.GetString(1),
+                        dr.GetDecimal(2),
+                        dr.GetInt32(3),
+                             Categoria.ObterPorId(dr.GetInt32(4)),
+                        dr.GetInt32(6),
+                        dr.GetString(7)
                         );
 
 

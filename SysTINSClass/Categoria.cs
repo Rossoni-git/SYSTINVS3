@@ -19,7 +19,7 @@ namespace SysTINSClass
 
 
         }
-        public Categoria (int id, string nome,string sigla )
+        public Categoria(int id, string nome, string sigla)
         {
             Id = id;
             Nome = nome;
@@ -41,9 +41,34 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spnome", Nome);
             cmd.Parameters.AddWithValue("spsigla", Sigla);
             cmd.Parameters.AddWithValue("spid", Id);
-          
+
 
         }
 
+        //Método Consultar da classe categoria
+        public static Categoria ObterPorId(int id)
+        {
+           Categoria categoria = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = $"select id, nome, sigla from niveis where id = {id}";
+            var dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+               
+                categoria = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
+            }
+            cmd.Connection.Close();
+            return categoria;
+
+
+
+
+
+
+        }
+
+        
+        
     }
 }
