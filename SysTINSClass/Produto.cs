@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SysTINSClass
 {
@@ -22,7 +23,12 @@ namespace SysTINSClass
 
         public int Produtoid { get; set; }
 
-        public Produto (string codbarras, string descricao, decimal vunidade, int minestoque,
+        public Produto(){
+
+            Categoria = new();
+            }
+
+        public Produto(string codbarras, string descricao, decimal vunidade, int minestoque,
             Categoria categoria, int desconto, string uvenda)
         {
 
@@ -62,6 +68,11 @@ namespace SysTINSClass
         public void Inserir()
 
         {
+
+
+
+
+
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_produto_insert";
@@ -75,10 +86,31 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spclasse_desconto", Desconto);
 
         }
+        //Metodo obter pod id terminado
+        public static Produto ObterPorId(int Produtoid)
+        {
+            Produto produto = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from usuarios where id = {Produtoid}";
+            var dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                produto = new(
+                        dr.GetInt32(0),
+                        dr.GetInt32(1),
+                        dr.GetString(2),
+                        dr.GetString(3),
+                        dr.GetDecimal(4),
+                        dr.GetInt32(5),
+                        Categoria.ObterPorId(dr.GetInt32(6)),
+                        dr.GetDecimal(6)
+                        );
+              
+                   
+            }
+            return produto;
 
 
-
-
+        }
     }
-
 }
