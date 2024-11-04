@@ -77,8 +77,21 @@ namespace SysTINSClass
             cmd.Connection.Close();
             return lista;
         }
-
-
+        //Método atualizar categoria
+        public bool Atualizar()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = $"update niveis set nome = '{Nome}', sigla = '{Sigla}' where id = {Id}";
+            return cmd.ExecuteNonQuery() > 0 ? true : false;
+        }
+        // Método deletar categoria
+        public void Excluir()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"delete from niveis where id = {Id}";
+            cmd.ExecuteNonQuery();
+        }
 
     }
 }
