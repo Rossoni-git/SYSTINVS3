@@ -18,7 +18,7 @@ namespace SysTINSClass
         public string? Telefone { get; set; }
         public string? Email { get; set; }
         public DateTime Data_nasc { get; set; }
-        public int Ativo { get; set; }
+        public bool Ativo { get; set; }
 
         public List<Endereco>? Endereco { get; set; }
 
@@ -27,7 +27,9 @@ namespace SysTINSClass
             Endereco = new();
         }
         //Metodo construtor
-        public Cliente(int id, string? nome, string cpf, string? telefone, string email, DateTime data_nasc, int ativo, List<Endereco> endereco)
+        
+        
+        public Cliente(int id, string? nome, string cpf, string? telefone, string email, DateTime data_nasc, bool ativo)
         {
             Id = id;
             Nome = nome;
@@ -36,7 +38,7 @@ namespace SysTINSClass
             Email = email;
             Data_nasc = data_nasc;
             Ativo = ativo;
-            Endereco = endereco;
+        
         }
 
         //Metodo construtor
@@ -109,10 +111,37 @@ namespace SysTINSClass
                         dr.GetString(3),
                             dr.GetString(4),
                               dr.GetDateTime(5),
-                              dr.GetInt32(6);
-                             
-            
+                              dr.GetBoolean(6)
+                );
+
+
             }
             return cliente;
+
         }
-    } }
+        //Metodo obterlist
+        public static List<Cliente> ObterLista()
+        {
+            List<Cliente> lista = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from cliente order by nome asc";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                lista.Add(new(
+                       dr.GetInt32(0),
+                        dr.GetString(1),
+                        dr.GetString(2),
+                        dr.GetString(3),
+                            dr.GetString(4),
+                              dr.GetDateTime(5),
+                              dr.GetBoolean(6)
+                    )
+                );
+            }
+            return lista;
+        }
+
+    }
+   } 
+
