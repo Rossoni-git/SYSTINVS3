@@ -132,7 +132,7 @@ namespace SysTINSClass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "sp_produto_update";
+            cmd.CommandText = "sp_produoto_update";
             cmd.Parameters.AddWithValue("spcod_barras", Codbarras);
             cmd.Parameters.AddWithValue("spdescricao",Descricao );
             cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
