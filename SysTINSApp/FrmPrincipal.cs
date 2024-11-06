@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sys
+using SysTINSClass;
 
 namespace SysTINSApp
 {
@@ -33,11 +33,16 @@ namespace SysTINSApp
             //if (frmLogin.ShowDialog() == DialogResult.OK)
             //{
             //    tsslUsuario.Text = Program.UsuarioLogado.Nome + " - " + Program.UsuarioLogado.Nivel.Nome;
-               Show();
+            Show();
             //}
             //else
             //    Application.Exit();
-                        
+
+        }
+
+        private void novoInserirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

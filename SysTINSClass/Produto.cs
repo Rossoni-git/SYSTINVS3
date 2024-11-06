@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Data;
 
 namespace SysTINSClass
 {
     public class Produto
     {//Criação de váriaveis da classe Produto
+        public int Produtoid { get; set; }
         public string Codbarras { get; set; }
         public string? Descricao { get; set; }
 
         public decimal Vunidade { get; set; }
-
         public string Uvenda { get; set; }
-
-        public int Minestoque { get; set; }
+        public decimal Minestoque { get; set; }
         public Categoria Categoria { get; set; }
-        public int? Desconto { get; set; }
+        public decimal? Desconto { get; set; }
 
-        public int Produtoid { get; set; }
+        public DateTime Datacad { get; set; }
+
+       
 
         public Produto() {
 
@@ -29,7 +24,7 @@ namespace SysTINSClass
         }
 
         public Produto(string codbarras, string descricao, decimal vunidade, int minestoque,
-            Categoria categoria, int desconto, string uvenda)
+            Categoria categoria, int desconto, string uvenda, DateTime datacad)
         {
 
             Codbarras = codbarras;
@@ -45,26 +40,12 @@ namespace SysTINSClass
             Categoria = categoria;
 
             Desconto = desconto;
+
+            Datacad = datacad;
+
         }
-        public Produto(int produtoid, string descricao, decimal vunidade, string uvenda, Categoria categoria,
-            int minestoque, int desconto, string codbarras)
-        {
-            Codbarras = codbarras;
-
-            Produtoid = produtoid;
-
-            Descricao = descricao;
-
-            Vunidade = vunidade;
-
-            Uvenda = uvenda;
-
-            Minestoque = minestoque;
-
-            Categoria = categoria;
-
-            Desconto = desconto;
-        }
+       
+ 
         public Produto( string descricao, decimal vunidade, string uvenda, Categoria categoria,
          int minestoque, int desconto, string codbarras)
         {
@@ -82,6 +63,20 @@ namespace SysTINSClass
 
             Desconto = desconto;
         }
+
+        public Produto(int produtoid, string codbarras, string? descricao, decimal vunidade, string uvenda, decimal minestoque, Categoria categoria, decimal? desconto, DateTime datacad)
+        {
+            Produtoid = produtoid;
+            Codbarras = codbarras;
+            Descricao = descricao;
+            Vunidade = vunidade;
+            Uvenda = uvenda;
+            Minestoque = minestoque;
+            Categoria = categoria;
+            Desconto = desconto;
+            Datacad = datacad;
+        }
+
         public void Inserir()
 
         {
@@ -93,14 +88,15 @@ namespace SysTINSClass
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_produto_insert";
-            cmd.Parameters.AddWithValue("spid", Produtoid);
-            cmd.Parameters.AddWithValue("spcod_barras", Codbarras);
+            cmd.Parameters.AddWithValue("spcod_barras",Codbarras);
             cmd.Parameters.AddWithValue("spdescricao", Descricao);
             cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
             cmd.Parameters.AddWithValue("spunidade_venda", Uvenda);
             cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
             cmd.Parameters.AddWithValue("spestoque_minimo", Minestoque);
             cmd.Parameters.AddWithValue("spclasse_desconto", Desconto);
+          Codbarras = Convert.ToInt32(cmd.ExecuteScalar());
+            cmd.Connection.Close();
 
         }
         //Metodo obter pod id terminado
@@ -113,14 +109,16 @@ namespace SysTINSClass
             if (dr.Read())
             {
                 produto = new(
-                        dr.GetString(0),
+                    dr.GetInt32(0),
                         dr.GetString(1),
-                        dr.GetDecimal(2),
-                        dr.GetInt32(3),
-                             Categoria.ObterPorId(dr.GetInt32(4)),
-                        dr.GetInt32(6),
-                        dr.GetString(7)
-                        );
+                        dr.GetString(2),
+                        dr.GetDecimal(3),
+                   dr.GetString(3),
+                      dr.GetInt32(6),
+               Categoria.ObterPorId(dr.GetInt32(7)),
+                        dr.GetDecimal(8),
+                        dr.GetDateTime(9)
+                        ); 
 
 
             }
@@ -134,7 +132,7 @@ namespace SysTINSClass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "sp_produoto_update";
+            cmd.CommandText = "sp_produto_update";
             cmd.Parameters.AddWithValue("spcod_barras", Codbarras);
             cmd.Parameters.AddWithValue("spdescricao",Descricao );
             cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);

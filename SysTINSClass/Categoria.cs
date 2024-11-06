@@ -9,7 +9,7 @@ namespace SysTINSClass
 {
     public class Categoria
     {
-        public int Id { get; set; }
+        public int Id { get; set; }//Criação de atributo da classe
         public string? Nome { get; set; }
         public string? Sigla { get; set; }
 
@@ -19,9 +19,18 @@ namespace SysTINSClass
 
 
         }
+        //Criando construtor
         public Categoria(int id, string nome, string sigla)
         {
             Id = id;
+            Nome = nome;
+            Sigla = sigla;
+
+        }
+
+        public Categoria( string nome, string sigla)
+        {
+          
             Nome = nome;
             Sigla = sigla;
 
@@ -40,7 +49,8 @@ namespace SysTINSClass
             cmd.CommandText = "sp_categoria_insert";
             cmd.Parameters.AddWithValue("spnome", Nome);
             cmd.Parameters.AddWithValue("spsigla", Sigla);
-            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
 
 
         }
@@ -51,7 +61,7 @@ namespace SysTINSClass
            Categoria categoria = new();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = $"select id, nome, sigla from niveis where id = {id}";
+            cmd.CommandText = $"select id, nome, sigla from categorias where id = {id}";
             var dr = cmd.ExecuteReader();
             if (dr.Read())
             {
@@ -65,32 +75,34 @@ namespace SysTINSClass
         //Método de obter lista da classe categoria
         public static List<Categoria> ObterLista()
         {
-            List<Categoria> lista = new();
+            List<Categoria> categorias = new();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from niveis order by nome asc";
+            cmd.CommandText = "select * from categorias order by nome asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                lista.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
+                categorias.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
             }
             cmd.Connection.Close();
-            return lista;
+            return categorias;
         }
         //Método atualizar categoria
         public bool Atualizar()
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = $"update niveis set nome = '{Nome}', sigla = '{Sigla}' where id = {Id}";
+            cmd.CommandText = $"update categorias set nome = '{Nome}', sigla = '{Sigla}' where id = {Id}";
             return cmd.ExecuteNonQuery() > 0 ? true : false;
         }
         // Método deletar categoria
         public void Excluir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"delete from niveis where id = {Id}";
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "sp_categoria_delete";
             cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
         }
 
     }
