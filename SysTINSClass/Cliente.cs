@@ -18,16 +18,16 @@ namespace SysTINSClass
         public string? Telefone { get; set; }
         public string? Email { get; set; }
         public DateTime Data_nasc { get; set; }
-        public bool Ativo { get; set; }
+        public int Ativo { get; set; }
 
         public List<Endereco>? Endereco { get; set; }
 
-        public Cliente(){
+        public Cliente() {
 
-           Endereco = new(); 
-            }
+            Endereco = new();
+        }
         //Metodo construtor
-        public Cliente(int id, string? nome, string cpf, string? telefone, string email, DateTime data_nasc,bool ativo, List<Endereco> endereco)
+        public Cliente(int id, string? nome, string cpf, string? telefone, string email, DateTime data_nasc, int ativo, List<Endereco> endereco)
         {
             Id = id;
             Nome = nome;
@@ -40,15 +40,15 @@ namespace SysTINSClass
         }
 
         //Metodo construtor
-        public Cliente( string? nome, string cpf, string? telefone, string email, DateTime data_nasc)
+        public Cliente(string? nome, string cpf, string? telefone, string email, DateTime data_nasc)
         {
-           
+
             Nome = nome;
             Cpf = cpf;
             Telefone = telefone;
             Email = email;
             Data_nasc = data_nasc;
-        
+
         }
         //Metodo construtor
         public Cliente(int id, string? nome, string? telefone, DateTime data_nasc)
@@ -93,6 +93,26 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spdatanasc", Data_nasc);
             return cmd.ExecuteNonQuery() > 0 ? true : false;
         }
-
-    }
-}
+        public static Cliente ObterPorId(int id)
+        {
+            //Método consultar id
+            Cliente cliente = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from clientes where id = {id}";
+            var dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                cliente = new(
+                        dr.GetInt32(0),
+                        dr.GetString(1),
+                        dr.GetString(2),
+                        dr.GetString(3),
+                            dr.GetString(4),
+                              dr.GetDateTime(5),
+                              dr.GetInt32(6);
+                             
+            
+            }
+            return cliente;
+        }
+    } }
