@@ -51,11 +51,10 @@ namespace SysTINSClass
         
         }
         //Metodo construtor
-        public Cliente(int id, string? nome, string cpf, string? telefone, DateTime data_nasc)
+        public Cliente(int id, string? nome, string? telefone, DateTime data_nasc)
         {
             Id = id;
             Nome = nome;
-            Cpf = cpf;
             Telefone = telefone;
             Data_nasc = data_nasc;
 
@@ -72,9 +71,27 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("sptelefone", Telefone);
             cmd.Parameters.AddWithValue("spemail", Email);
             cmd.Parameters.AddWithValue("spdatanasc", Data_nasc);
+            var dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                Id = dr.GetInt32(0);
+
+            }
+            cmd.Connection.Close();
 
 
-
+        }
+        //Método atualizar
+        public bool Atualizar()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_cliente_altera";
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("sptelefone", Telefone);
+            cmd.Parameters.AddWithValue("spdatanasc", Data_nasc);
+            return cmd.ExecuteNonQuery() > 0 ? true : false;
         }
 
     }
