@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,5 +60,22 @@ namespace SysTINSClass
             Data_nasc = data_nasc;
 
         }
+        //Método inserir terminado
+        public void Inserir()
+        {
+            var cmd = Banco.Abrir();
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_cliente_insert";
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("spcpf", Cpf);
+            cmd.Parameters.AddWithValue("sptelefone", Telefone);
+            cmd.Parameters.AddWithValue("spemail", Email);
+            cmd.Parameters.AddWithValue("spdatanasc", Data_nasc);
+
+
+
+        }
+
     }
 }
