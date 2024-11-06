@@ -119,7 +119,7 @@ namespace SysTINSClass
             return cliente;
 
         }
-        //Metodo obterlist
+        //Metodo obterlista
         public static List<Cliente> ObterLista()
         {
             List<Cliente> lista = new();
