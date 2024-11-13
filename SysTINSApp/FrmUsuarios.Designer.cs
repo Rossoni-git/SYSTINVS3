@@ -286,27 +286,27 @@
 
         #endregion
 
-        private Button btnInserir;
-        private Button btnConsultar;
-        private Button btnAtualizar;
-        private DataGridView dgvUsuarios;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private ComboBox cmbNivel;
-        private Label label5;
-        private CheckBox chkAtivo;
-        private TextBox txtId;
-        private TextBox txtNome;
-        private TextBox txtEmail;
-        private TextBox txtSenha;
-        private TextBox txtConfSenha;
-        private Label label6;
-        private DataGridViewTextBoxColumn clnId;
-        private DataGridViewTextBoxColumn clnNome;
-        private DataGridViewTextBoxColumn clnEmail;
-        private DataGridViewTextBoxColumn clnNivel;
-        private DataGridViewCheckBoxColumn clnAtivo;
+            private Button btnInserir;
+            private Button btnConsultar;
+            private Button btnAtualizar;
+            private DataGridView dgvUsuarios;
+            private Label label1;
+            private Label label2;
+            private Label label3;
+            private Label label4;
+            private ComboBox cmbNivel;
+            private Label label5;
+            private CheckBox chkAtivo;
+            private TextBox txtId;
+            private TextBox txtNome;
+            private TextBox txtEmail;
+            private TextBox txtSenha;
+            private TextBox txtConfSenha;
+            private Label label6;
+            private DataGridViewTextBoxColumn clnId;
+            private DataGridViewTextBoxColumn clnNome;
+            private DataGridViewTextBoxColumn clnEmail;
+            private DataGridViewTextBoxColumn clnNivel;
+            private DataGridViewCheckBoxColumn clnAtivo;
     }
 }

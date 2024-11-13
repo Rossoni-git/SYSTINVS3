@@ -35,6 +35,13 @@ namespace SysTINSClass
             Sigla = sigla;
 
         }
+        public Categoria(int id,string nome )
+        {
+            Id = id;
+            Nome = nome;
+           
+
+        }
         //Método insert da class categoria
         public void Inserir()
 
@@ -66,7 +73,7 @@ namespace SysTINSClass
             if (dr.Read())
             {
                
-                categoria = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
+                categoria = new(dr.GetInt32(0), dr.GetString(1));
             }
             cmd.Connection.Close();
             return categoria;
@@ -82,7 +89,7 @@ namespace SysTINSClass
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                categorias.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
+                categorias.Add(new(dr.GetInt32(0), dr.GetString(1))) ;
             }
             cmd.Connection.Close();
             return categorias;

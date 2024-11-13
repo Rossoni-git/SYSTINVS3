@@ -38,6 +38,7 @@ namespace SysTINSClass
             Email = email;
             Data_nasc = data_nasc;
             Ativo = ativo;
+            Endereco = new List<Endereco>();
         
         }
 

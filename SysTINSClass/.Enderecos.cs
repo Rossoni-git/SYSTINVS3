@@ -14,7 +14,7 @@ namespace SysTINSClass
 
 
         public int Id { get; set; }
-        public Cliente? Cliente { get; set; }
+        public int Cliente_Id { get; set; }
         public string? Cep { get; set; }
         public string? Logradouro { get; set; }
         public string? Numero { get; set; }
@@ -24,11 +24,16 @@ namespace SysTINSClass
         public string? Uf { get; set; }
         public string? Tipo_endereco { get; set; }
 
+        Endereco() {
+   
+
+            }
+
         //Métodos construtores
-        public Endereco(int id, Cliente cliente, string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipo_endereco)
+        public Endereco(int id,string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipo_endereco)
         {
             Id = id;
-            Cliente = cliente;
+         
             Cep = cep;
             Logradouro = logradouro;
             Numero = numero;
@@ -38,11 +43,11 @@ namespace SysTINSClass
             Uf = uf;
             Tipo_endereco = tipo_endereco;
         }
-        public Endereco(Cliente cliente, string? cep, string? logradouro, string? numero, string? complemento,
+        public Endereco( string? cep, string? logradouro, string? numero, string? complemento,
             string? bairro, string? cidade, string? uf, string? tipo_endereco)
         {
 
-            Cliente = cliente;
+           
             Cep = cep;
             Logradouro = logradouro;
             Numero = numero;
@@ -53,11 +58,12 @@ namespace SysTINSClass
             Tipo_endereco = tipo_endereco;
         }
         //Métodos Construtores
-        public Endereco(int id, string? cep, string? logradouro, string? numero, string? complemento,
-           string? bairro, string? cidade, string? uf, string? tipo_endereco)
-        {
+       
 
+        public Endereco(int id, int cliente_Id, string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipo_endereco)
+        {
             Id = id;
+            Cliente_Id = cliente_Id;
             Cep = cep;
             Logradouro = logradouro;
             Numero = numero;
@@ -110,26 +116,6 @@ namespace SysTINSClass
             return cmd.ExecuteNonQuery() > 0 ? true : false;
         }
         // efetuar login
-        public static Usuario EfetuarLogin(string email, string senha)
-        {
-            Usuario usuario = new();
-            var cmd = Banco.Abrir();
-            cmd.CommandText = $"select * from usuarios where email = '{email}' and senha = md5('{senha}') and ativo = 1";
-            var dr = cmd.ExecuteReader();
-            if (dr.Read())
-            {
-                usuario = new(
-                        dr.GetInt32(0),
-                        dr.GetString(1),
-                        dr.GetString(2),
-                        dr.GetString(3),
-                        Nivel.ObterPorId(dr.GetInt32(4)),
-                        dr.GetBoolean(5)
-                    );
-            }
-            return usuario;
-
-        }
         public void Excluir()
         {
             var cmd = Banco.Abrir();
@@ -138,18 +124,35 @@ namespace SysTINSClass
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
-        public static List<Endereco> ObterLista()
+        public static List<Endereco> ObterListaDoCliente(int cliente_Id)
         {
+            List<Endereco> lista = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from clientes where id= {cliente_Id}";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                lista.Add(new(
+               dr.GetInt32(0),
+               dr.GetInt32(1),
+              dr.GetString(2),
+                   dr.GetString(3),
+                   dr.GetString(4),
+                    dr.GetString(5),
+                     dr.GetString(5),
+                      dr.GetString(6),
+                       dr.GetString(7),
+                        dr.GetString(8)
+                        )
 
+                    );
 
-
-            return ObterLista();
+              
+            }
+            return lista;
         }
-        
-       
 
-
-
+      
     }
 
 }

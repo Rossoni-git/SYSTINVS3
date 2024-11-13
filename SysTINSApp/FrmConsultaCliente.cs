@@ -16,5 +16,25 @@ namespace SysTINSApp
         {
             InitializeComponent();
         }
+
+        private void FrmConsultaCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

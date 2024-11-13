@@ -44,5 +44,13 @@ namespace SysTINSApp
         {
 
         }
+
+        private void manterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProdutos frmProdutos = new();
+            frmProdutos.MdiParent = this;
+            frmProdutos.Show();
+
+        }
     }
 }

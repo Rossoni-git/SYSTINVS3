@@ -1,148 +1,143 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SysTINSClass
 {
     public class Produto
-    {//Criação de váriaveis da classe Produto
-        public int Produtoid { get; set; }
-        public string Codbarras { get; set; }
+    {
+        public int Id { get; set; }
+        public string? CodBar { get; set; }
         public string? Descricao { get; set; }
-
-        public decimal Vunidade { get; set; }
-        public string Uvenda { get; set; }
-        public decimal Minestoque { get; set; }
+        public double ValorUnit { get; set; }
+        public string? UnidadeVenda { get; set; }
         public Categoria Categoria { get; set; }
-        public decimal? Desconto { get; set; }
+        public double EstoqueMinimo { get; set; }
+        public double ClasseDesconto { get; set; }
+        public DateTime DataCad { get; set; }
 
-        public DateTime Datacad { get; set; }
-
-       
-
-        public Produto() {
-
+        public Produto()
+        {
             Categoria = new();
         }
 
-        public Produto(string codbarras, string descricao, decimal vunidade, int minestoque,
-            Categoria categoria, int desconto, string uvenda, DateTime datacad)
+
+
+        public Produto(string codBar, string? descricao, double valorUnit, string? unidadeVenda, Categoria categoria, double estoqueMinimo, double classeDesconto)
         {
-
-            Codbarras = codbarras;
-
+            CodBar = codBar;
             Descricao = descricao;
-
-            Vunidade = vunidade;
-
-            Uvenda = uvenda;
-
-            Minestoque = minestoque;
-
+            ValorUnit = valorUnit;
+            UnidadeVenda = unidadeVenda;
             Categoria = categoria;
-
-            Desconto = desconto;
-
-            Datacad = datacad;
-
+            EstoqueMinimo = estoqueMinimo;
+            ClasseDesconto = classeDesconto;
         }
-       
- 
-        public Produto( string descricao, decimal vunidade, string uvenda, Categoria categoria,
-         int minestoque, int desconto, string codbarras)
+        public Produto(int id, string codBar, string? descricao, double valorUnit, string? unidadeVenda, Categoria categoria, double estoqueMinimo, double classeDesconto, DateTime dataCad)
         {
-            Codbarras = codbarras;
-
+            Id = id;
+            CodBar = codBar;
             Descricao = descricao;
-
-            Vunidade = vunidade;
-
-            Uvenda = uvenda;
-
-            Minestoque = minestoque;
-
+            ValorUnit = valorUnit;
+            UnidadeVenda = unidadeVenda;
             Categoria = categoria;
-
-            Desconto = desconto;
-        }
-
-        public Produto(int produtoid, string codbarras, string? descricao, decimal vunidade, string uvenda, decimal minestoque, Categoria categoria, decimal? desconto, DateTime datacad)
-        {
-            Produtoid = produtoid;
-            Codbarras = codbarras;
-            Descricao = descricao;
-            Vunidade = vunidade;
-            Uvenda = uvenda;
-            Minestoque = minestoque;
-            Categoria = categoria;
-            Desconto = desconto;
-            Datacad = datacad;
+            EstoqueMinimo = estoqueMinimo;
+            ClasseDesconto = classeDesconto;
+            DataCad = dataCad;
         }
 
         public void Inserir()
-
         {
-
-
-
-
-
             var cmd = Banco.Abrir();
-            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "sp_produto_insert";
-            cmd.Parameters.AddWithValue("spcod_barras",Codbarras);
+            cmd.Parameters.AddWithValue("spcod_barras", CodBar);
             cmd.Parameters.AddWithValue("spdescricao", Descricao);
-            cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
-            cmd.Parameters.AddWithValue("spunidade_venda", Uvenda);
+            cmd.Parameters.AddWithValue("spvalor_unit", ValorUnit);
+            cmd.Parameters.AddWithValue("spunidade_venda", UnidadeVenda);
             cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
-            cmd.Parameters.AddWithValue("spestoque_minimo", Minestoque);
-            cmd.Parameters.AddWithValue("spclasse_desconto", Desconto);
-          Codbarras = Convert.ToInt32(cmd.ExecuteScalar());
+            cmd.Parameters.AddWithValue("spestoque_minimo", EstoqueMinimo);
+            cmd.Parameters.AddWithValue("spclasse_desconto", ClasseDesconto);
+            Id = Convert.ToInt32(cmd.ExecuteScalar());
             cmd.Connection.Close();
-
         }
-        //Metodo obter pod id terminado
-        public static Produto ObterPorId(int Produtoid)
+        public static Produto ObterPorId(int id)
         {
             Produto produto = new();
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"select * from usuarios where id = {Produtoid}";
+            cmd.CommandText = $"select * from produtos where id = {id}";
             var dr = cmd.ExecuteReader();
-            if (dr.Read())
+            while (dr.Read())
             {
                 produto = new(
-                    dr.GetInt32(0),
-                        dr.GetString(1),
-                        dr.GetString(2),
-                        dr.GetDecimal(3),
-                   dr.GetString(3),
-                      dr.GetInt32(6),
-               Categoria.ObterPorId(dr.GetInt32(7)),
-                        dr.GetDecimal(8),
-                        dr.GetDateTime(9)
-                        ); 
-
-
+                   dr.GetInt32(0),
+                   dr.GetString(1),
+                   dr.GetString(2),
+                   dr.GetDouble(3),
+                   dr.GetString(4),
+                   Categoria.ObterPorId(dr.GetInt32(5)),
+                   dr.GetDouble(6),
+                   dr.GetDouble(7),
+                   dr.GetDateTime(9)
+                    );
             }
             return produto;
-
-
-
         }
-        //Método atualizar terminado
+        public static List<Produto> ObterLista()
+        {
+            List<Produto> produtos = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from produtos order by descricao asc";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                produtos.Add(new(
+                   dr.GetInt32(0),
+                   dr.GetString(1),
+                   dr.GetString(2),
+                   dr.GetDouble(3),
+                   dr.GetString(4),
+                   Categoria.ObterPorId(dr.GetInt32(5)),
+                   dr.GetDouble(6),
+                   dr.GetDouble(7),
+                   dr.GetDateTime(9)
+                    ));
+            }
+            return produtos;
+        }
         public bool Atualizar()
         {
+            bool resposta = false;
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "sp_produoto_update";
-            cmd.Parameters.AddWithValue("spcod_barras", Codbarras);
-            cmd.Parameters.AddWithValue("spdescricao",Descricao );
-            cmd.Parameters.AddWithValue("spvalor_unit", Vunidade);
+            cmd.CommandText = "sp_produto_update";
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spcod_barras", CodBar);
+            cmd.Parameters.AddWithValue("spdescricao", Descricao);
+            cmd.Parameters.AddWithValue("spvalor_unit", ValorUnit);
+            cmd.Parameters.AddWithValue("spunidade_venda", UnidadeVenda);
             cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
-            cmd.Parameters.AddWithValue("spestoque_minimo", Minestoque);
-            cmd.Parameters.AddWithValue("spcalsse_desconto", Desconto);
-
-
-            return cmd.ExecuteNonQuery() > 0 ? true : false;
+            cmd.Parameters.AddWithValue("spestoque_minimo", EstoqueMinimo);
+            cmd.Parameters.AddWithValue("spclasse_desconto", ClasseDesconto);
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                cmd.Connection.Close();
+                resposta = true;
+            }
+            return resposta;
         }
+        public void Excluir()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_produto_delete";
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+        }
+
     }
-   
 }
