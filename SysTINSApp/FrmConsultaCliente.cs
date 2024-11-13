@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SysTINSClass;
 
 namespace SysTINSApp
 {
@@ -35,6 +36,24 @@ namespace SysTINSApp
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnInserirCliente(object sender, EventArgs e)
+        {
+           Cliente cliete = new(
+               txtNome.Text,
+               txtEmail.Text,
+               txtSenha.Text,
+               Nivel.ObterPorId(Convert.ToInt32(cmbNivel.SelectedValue))
+               );
+            usuario.Inserir();
+            if (usuario.Id > 0)
+            {
+                // carrega grid
+                CarregaGridUsuarios();
+                MessageBox.Show($"Usuário {usuario.Nome} inserido com sucesso");
+                btnInserir.Enabled = false;
+            }
         }
     }
 }

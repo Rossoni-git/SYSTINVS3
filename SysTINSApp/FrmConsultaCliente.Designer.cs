@@ -35,12 +35,12 @@
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
-            textBox2 = new TextBox();
+            txtNomecliente = new TextBox();
             textBox3 = new TextBox();
             textBox6 = new TextBox();
             textBox7 = new TextBox();
             dateTimePicker1 = new DateTimePicker();
-            button1 = new Button();
+            btnInserircliente = new Button();
             dataGridView1 = new DataGridView();
             Id_Cliente = new DataGridViewTextBoxColumn();
             Nome_cliente = new DataGridViewTextBoxColumn();
@@ -116,12 +116,12 @@
             label8.Text = "Cadastro de Cliente";
             label8.Click += label8_Click;
             // 
-            // textBox2
+            // txtNomecliente
             // 
-            textBox2.Location = new Point(59, 114);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(390, 23);
-            textBox2.TabIndex = 9;
+            txtNomecliente.Location = new Point(59, 114);
+            txtNomecliente.Name = "txtNomecliente";
+            txtNomecliente.Size = new Size(390, 23);
+            txtNomecliente.TabIndex = 9;
             // 
             // textBox3
             // 
@@ -152,20 +152,21 @@
             dateTimePicker1.Size = new Size(112, 23);
             dateTimePicker1.TabIndex = 15;
             // 
-            // button1
+            // btnInserircliente
             // 
-            button1.Location = new Point(277, 239);
-            button1.Name = "button1";
-            button1.Size = new Size(101, 29);
-            button1.TabIndex = 16;
-            button1.Text = "Inserir";
-            button1.UseVisualStyleBackColor = true;
+            btnInserircliente.Location = new Point(277, 239);
+            btnInserircliente.Name = "btnInserircliente";
+            btnInserircliente.Size = new Size(101, 29);
+            btnInserircliente.TabIndex = 16;
+            btnInserircliente.Text = "Inserir";
+            btnInserircliente.UseVisualStyleBackColor = true;
+            btnInserircliente.Click += btnInserirCliente;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id_Cliente, Nome_cliente, cpf_cliente, Telefone_cliente, Email_Cliente, Datanasc_cliente });
-            dataGridView1.Location = new Point(59, 315);
+            dataGridView1.Location = new Point(57, 315);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.Size = new Size(650, 123);
@@ -211,12 +212,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(dataGridView1);
-            Controls.Add(button1);
+            Controls.Add(btnInserircliente);
             Controls.Add(dateTimePicker1);
             Controls.Add(textBox7);
             Controls.Add(textBox6);
             Controls.Add(textBox3);
-            Controls.Add(textBox2);
+            Controls.Add(txtNomecliente);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -241,12 +242,12 @@
         private Label label6;
         private Label label7;
         private Label label8;
-        private TextBox textBox2;
+        private TextBox txtNomecliente;
         private TextBox textBox3;
         private TextBox textBox6;
         private TextBox textBox7;
         private DateTimePicker dateTimePicker1;
-        private Button button1;
+        private Button btnInserircliente;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn Id_Cliente;
         private DataGridViewTextBoxColumn Nome_cliente;
