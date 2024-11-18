@@ -52,5 +52,18 @@ namespace SysTINSApp
             frmProdutos.Show();
 
         }
+
+        private void cadastrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void novoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmNovocliente frmNovocliente = new();
+            frmNovocliente.MdiParent = this;
+            frmNovocliente.Show();
+
+        }
     }
 }

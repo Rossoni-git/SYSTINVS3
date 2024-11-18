@@ -36,6 +36,7 @@
             produtosToolStripMenuItem = new ToolStripMenuItem();
             novoInserirToolStripMenuItem = new ToolStripMenuItem();
             buscarToolStripMenuItem1 = new ToolStripMenuItem();
+            manterToolStripMenuItem = new ToolStripMenuItem();
             usuáriosToolStripMenuItem = new ToolStripMenuItem();
             novoToolStripMenuItem1 = new ToolStripMenuItem();
             consultarToolStripMenuItem = new ToolStripMenuItem();
@@ -58,7 +59,6 @@
             sairToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             tsslUsuario = new ToolStripStatusLabel();
-            manterToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -78,6 +78,7 @@
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(71, 20);
             cadastrosToolStripMenuItem.Text = "&Cadastros";
+            cadastrosToolStripMenuItem.Click += cadastrosToolStripMenuItem_Click;
             // 
             // clientesToolStripMenuItem
             // 
@@ -89,13 +90,14 @@
             // novoToolStripMenuItem
             // 
             novoToolStripMenuItem.Name = "novoToolStripMenuItem";
-            novoToolStripMenuItem.Size = new Size(109, 22);
+            novoToolStripMenuItem.Size = new Size(180, 22);
             novoToolStripMenuItem.Text = "&Novo";
+            novoToolStripMenuItem.Click += novoToolStripMenuItem_Click;
             // 
             // buscarToolStripMenuItem
             // 
             buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
-            buscarToolStripMenuItem.Size = new Size(109, 22);
+            buscarToolStripMenuItem.Size = new Size(180, 22);
             buscarToolStripMenuItem.Text = "&Buscar";
             // 
             // produtosToolStripMenuItem
@@ -108,15 +110,22 @@
             // novoInserirToolStripMenuItem
             // 
             novoInserirToolStripMenuItem.Name = "novoInserirToolStripMenuItem";
-            novoInserirToolStripMenuItem.Size = new Size(180, 22);
+            novoInserirToolStripMenuItem.Size = new Size(146, 22);
             novoInserirToolStripMenuItem.Text = "&Novo (Inserir)";
             novoInserirToolStripMenuItem.Click += novoInserirToolStripMenuItem_Click;
             // 
             // buscarToolStripMenuItem1
             // 
             buscarToolStripMenuItem1.Name = "buscarToolStripMenuItem1";
-            buscarToolStripMenuItem1.Size = new Size(180, 22);
+            buscarToolStripMenuItem1.Size = new Size(146, 22);
             buscarToolStripMenuItem1.Text = "&Buscar";
+            // 
+            // manterToolStripMenuItem
+            // 
+            manterToolStripMenuItem.Name = "manterToolStripMenuItem";
+            manterToolStripMenuItem.Size = new Size(146, 22);
+            manterToolStripMenuItem.Text = "&Manter";
+            manterToolStripMenuItem.Click += manterToolStripMenuItem_Click;
             // 
             // usuáriosToolStripMenuItem
             // 
@@ -258,13 +267,6 @@
             tsslUsuario.Name = "tsslUsuario";
             tsslUsuario.Size = new Size(12, 17);
             tsslUsuario.Text = "-";
-            // 
-            // manterToolStripMenuItem
-            // 
-            manterToolStripMenuItem.Name = "manterToolStripMenuItem";
-            manterToolStripMenuItem.Size = new Size(180, 22);
-            manterToolStripMenuItem.Text = "&Manter";
-            manterToolStripMenuItem.Click += manterToolStripMenuItem_Click;
             // 
             // FrmPrincipal
             // 
