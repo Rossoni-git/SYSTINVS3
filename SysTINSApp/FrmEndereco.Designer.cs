@@ -47,7 +47,7 @@
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
-            dataGridView1 = new DataGridView();
+            dgvEndereco = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
@@ -61,8 +61,8 @@
             btnInserir = new Button();
             btnAtualizar = new Button();
             label1 = new Label();
-            cmbClienteID = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            txtClienteID = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)dgvEndereco).BeginInit();
             SuspendLayout();
             // 
             // txtID
@@ -71,7 +71,6 @@
             txtID.Name = "txtID";
             txtID.Size = new Size(100, 23);
             txtID.TabIndex = 0;
-            txtID.TextChanged += txtID_TextChanged;
             // 
             // txtNumero
             // 
@@ -219,15 +218,16 @@
             label10.TabIndex = 16;
             label10.Text = "UF";
             // 
-            // dataGridView1
+            // dgvEndereco
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9, Column10 });
-            dataGridView1.Location = new Point(34, 288);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(1003, 150);
-            dataGridView1.TabIndex = 17;
+            dgvEndereco.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEndereco.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9, Column10 });
+            dgvEndereco.Location = new Point(34, 288);
+            dgvEndereco.Name = "dgvEndereco";
+            dgvEndereco.RowHeadersVisible = false;
+            dgvEndereco.Size = new Size(1003, 150);
+            dgvEndereco.TabIndex = 17;
+            dgvEndereco.CellContentClick += dgvEndereco_CellContentClick;
             // 
             // Column1
             // 
@@ -311,24 +311,24 @@
             label1.TabIndex = 20;
             label1.Text = "Inserir Endereço";
             // 
-            // cmbClienteID
+            // txtClienteID
             // 
-            cmbClienteID.FormattingEnabled = true;
-            cmbClienteID.Location = new Point(46, 137);
-            cmbClienteID.Name = "cmbClienteID";
-            cmbClienteID.Size = new Size(121, 23);
-            cmbClienteID.TabIndex = 21;
+            txtClienteID.Location = new Point(46, 137);
+            txtClienteID.Name = "txtClienteID";
+            txtClienteID.Size = new Size(100, 23);
+            txtClienteID.TabIndex = 21;
+            txtClienteID.TextChanged += textBox1_TextChanged;
             // 
             // FrmEndereco
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1073, 450);
-            Controls.Add(cmbClienteID);
+            Controls.Add(txtClienteID);
             Controls.Add(label1);
             Controls.Add(btnAtualizar);
             Controls.Add(btnInserir);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvEndereco);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -351,7 +351,7 @@
             Name = "FrmEndereco";
             Text = "FrmEndereco";
             Load += FrmEndereco_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEndereco).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -377,7 +377,7 @@
         private Label label8;
         private Label label9;
         private Label label10;
-        private DataGridView dataGridView1;
+        private DataGridView dgvEndereco;
         private Button btnInserir;
         private Button btnAtualizar;
         private DataGridViewTextBoxColumn Column1;
@@ -391,8 +391,6 @@
         private DataGridViewTextBoxColumn Column9;
         private DataGridViewTextBoxColumn Column10;
         private Label label1;
-        private ComboBox cmbClienteID;
-
-
+        private TextBox txtClienteID;
     }
 }

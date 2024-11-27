@@ -23,42 +23,7 @@ namespace SysTINSClass
         public string? Cidade { get; set; }
         public string? Uf { get; set; }
         public string? Tipo_endereco { get; set; }
-
-        Endereco() {
-   
-
-            }
-
-        //Métodos construtores
-        public Endereco(int id,string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipo_endereco)
-        {
-            Id = id;
-         
-            Cep = cep;
-            Logradouro = logradouro;
-            Numero = numero;
-            Complemento = complemento;
-            Bairro = bairro;
-            Cidade = cidade;
-            Uf = uf;
-            Tipo_endereco = tipo_endereco;
-        }
-        public Endereco( string? cep, string? logradouro, string? numero, string? complemento,
-            string? bairro, string? cidade, string? uf, string? tipo_endereco)
-        {
-
-           
-            Cep = cep;
-            Logradouro = logradouro;
-            Numero = numero;
-            Complemento = complemento;
-            Bairro = bairro;
-            Cidade = cidade;
-            Uf = uf;
-            Tipo_endereco = tipo_endereco;
-        }
-        //Métodos Construtores
-       
+        public Endereco() { }
 
         public Endereco(int id, int cliente_Id, string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipo_endereco)
         {
@@ -73,13 +38,32 @@ namespace SysTINSClass
             Uf = uf;
             Tipo_endereco = tipo_endereco;
         }
+        //Métodos construtores
+        public Endereco(int id,string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipo_endereco)
+        {
+            Id = id;
+            Cep = cep;
+            Logradouro = logradouro;
+            Numero = numero;
+            Complemento = complemento;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+            Tipo_endereco = tipo_endereco;
+        }
+       
+        //Métodos Construtores
+       
 
+      
+     
         public void Inserir()
         {
             var cmd = Banco.Abrir();
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_enderecos_insert";
+            cmd.Parameters.AddWithValue("spcliente_id", Cliente_Id);
             cmd.Parameters.AddWithValue("spcep", Cep);
             cmd.Parameters.AddWithValue("splogradouro", Logradouro);
             cmd.Parameters.AddWithValue("spnumero", Numero);
@@ -87,13 +71,8 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spbairro", Bairro);
             cmd.Parameters.AddWithValue("spcidade", Cidade);
             cmd.Parameters.AddWithValue("spuf", Uf);
-            cmd.Parameters.AddWithValue("sptipo", Tipo_endereco);
-            var dr = cmd.ExecuteReader();
-            if (dr.Read())
-            {
-                Id = dr.GetInt32(0);
-
-            }
+            cmd.Parameters.AddWithValue("sptipo_endereco", Tipo_endereco);
+            cmd.ExecuteNonQuery();
             cmd.Connection.Close();
 
         }
@@ -102,7 +81,7 @@ namespace SysTINSClass
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_endereco_altera";
-            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spcliente_id", Cliente_Id);
             cmd.Parameters.AddWithValue("spcep", Cep);
             cmd.Parameters.AddWithValue("splogradouro", Logradouro);
             cmd.Parameters.AddWithValue("spnumero", Numero);
@@ -124,11 +103,11 @@ namespace SysTINSClass
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
-        public static List<Endereco> ObterListaDoCliente(int cliente_Id)
+        public static List<Endereco> ObterListaDoCliente(int id)
         {
             List<Endereco> lista = new();
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"select * from clientes where id= {cliente_Id}";
+            cmd.CommandText = $"select * from enderecos where id= {id}";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -139,10 +118,10 @@ namespace SysTINSClass
                    dr.GetString(3),
                    dr.GetString(4),
                     dr.GetString(5),
-                     dr.GetString(5),
                       dr.GetString(6),
                        dr.GetString(7),
-                        dr.GetString(8)
+                        dr.GetString(8),
+                          dr.GetString(9)
                         )
 
                     );

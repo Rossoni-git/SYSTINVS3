@@ -26,18 +26,16 @@ namespace SysTINSApp
         }
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
-        {
-            Hide();
-            FrmLogin frmLogin = new();
-            //frmLogin.Show();
-            //if (frmLogin.ShowDialog() == DialogResult.OK)
-            //{
-            //    tsslUsuario.Text = Program.UsuarioLogado.Nome + " - " + Program.UsuarioLogado.Nivel.Nome;
-            Show();
-            //}
-            //else
-            //    Application.Exit();
-
+        { 
+          Hide();
+        FrmLogin frmLogin = new();
+            if (frmLogin.ShowDialog() == DialogResult.OK)
+            {
+                tsslUsuario.Text = Program.UsuarioLogado.Nome + " - " + Program.UsuarioLogado.Nivel.Nome;
+                Show();
+    }
+            else
+                Application.Exit();
         }
 
         private void novoInserirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,7 +68,7 @@ namespace SysTINSApp
         {
             FrmPedidoNovo frmPedidoNovo = new();
             frmPedidoNovo.MdiParent = this;
-            //frmPedidoNovo.txtUsuario.Text = Program.UsuarioLogado.Id + " - " + Program.UsuarioLogado.Nome;
+            frmPedidoNovo.txtUsuario.Text = Program.UsuarioLogado.Id + " - " + Program.UsuarioLogado.Nome;
             frmPedidoNovo.Show();
         }
 

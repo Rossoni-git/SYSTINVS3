@@ -19,29 +19,68 @@ namespace SysTINSApp
         }
         private void FrmEndereco_Load(object sender, EventArgs e)
         {
-            cmbClienteID.DataSource = Cliente.ObterLista();
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvEndereco_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void CarregaGridEndereco()
+        {
+            var listaDeEnderecos = Endereco.ObterListaDoCliente(int.Parse(txtClienteID.Text));
+            dgvEndereco.Rows.Clear();
+            int linha = 0;
+            foreach (var enderecos in listaDeEnderecos)
+            {
+                dgvEndereco.Rows.Add();
+                dgvEndereco.Rows[linha].Cells[0].Value = enderecos.Id;
+                dgvEndereco.Rows[linha].Cells[1].Value = enderecos.Cliente_Id;
+                dgvEndereco.Rows[linha].Cells[2].Value = enderecos.Cep;
+                dgvEndereco.Rows[linha].Cells[3].Value = enderecos.Logradouro;
+                dgvEndereco.Rows[linha].Cells[4].Value = enderecos.Numero;
+                dgvEndereco.Rows[linha].Cells[5].Value = enderecos.Complemento;
+                dgvEndereco.Rows[linha].Cells[6].Value = enderecos.Bairro;
+                dgvEndereco.Rows[linha].Cells[7].Value = enderecos.Cidade;
+                dgvEndereco.Rows[linha].Cells[8].Value = enderecos.Tipo_endereco;
+                dgvEndereco.Rows[linha].Cells[9].Value = enderecos.Uf;
+                linha++;
+
+            }
+
+
+
+
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
             Endereco endereco = new(
-          Cliente.ObterporId(int.Parse(cmbClienteID.Text)),
-              txtCEP.Text,
-
-              txtSenha.Text,  );
-            usuario.Inserir();
-            if (usuario.Id > 0)
+                       int.Parse(txtID.Text),
+                       int.Parse(txtClienteID.Text),
+                             txtCEP.Text,
+                         txtLogradouro.Text,
+                        txtNumero.Text,
+                        txtComplemento.Text,
+                        txtBairro.Text,
+                        txtUF.Text,
+                        txtComplemento.Text
+                        );
+            endereco.Inserir();
+            if (endereco.Id > 0)
             {
-                // carrega grid
-                CarregaGridUsuarios();
-                MessageBox.Show($"Usuário {usuario.Nome} inserido com sucesso");
+                 
+
+                CarregaGridEndereco();
+                MessageBox.Show($"Endereço {endereco.Cep} inserido com sucesso");
                 btnInserir.Enabled = false;
             }
-        }
-
-        private void txtID_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

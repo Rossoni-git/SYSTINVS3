@@ -32,7 +32,7 @@
             button1 = new Button();
             btnInserePedido = new Button();
             txtIdCliente = new TextBox();
-            textBox3 = new TextBox();
+            txtClienteNome = new TextBox();
             txtUsuario = new TextBox();
             label3 = new Label();
             grbItens = new GroupBox();
@@ -82,7 +82,7 @@
             grbIndentificacao.Controls.Add(button1);
             grbIndentificacao.Controls.Add(btnInserePedido);
             grbIndentificacao.Controls.Add(txtIdCliente);
-            grbIndentificacao.Controls.Add(textBox3);
+            grbIndentificacao.Controls.Add(txtClienteNome);
             grbIndentificacao.Controls.Add(txtUsuario);
             grbIndentificacao.Controls.Add(label3);
             grbIndentificacao.Location = new Point(35, 84);
@@ -99,7 +99,7 @@
             button1.Location = new Point(34, 87);
             button1.Name = "button1";
             button1.Size = new Size(87, 40);
-            button1.TabIndex = 3;
+            button1.TabIndex = 5;
             button1.Text = "Cliente";
             button1.TextImageRelation = TextImageRelation.TextBeforeImage;
             button1.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             btnInserePedido.Location = new Point(506, 44);
             btnInserePedido.Name = "btnInserePedido";
             btnInserePedido.Size = new Size(90, 62);
-            btnInserePedido.TabIndex = 1;
+            btnInserePedido.TabIndex = 2;
             btnInserePedido.Text = "Abrir";
             btnInserePedido.UseVisualStyleBackColor = true;
             btnInserePedido.Click += btnInserePedido_Click;
@@ -121,14 +121,17 @@
             txtIdCliente.Name = "txtIdCliente";
             txtIdCliente.Size = new Size(78, 27);
             txtIdCliente.TabIndex = 0;
+            txtIdCliente.TextChanged += txtIdCliente_TextChanged;
+            txtIdCliente.Leave += txtIdCliente_Leave;
             // 
-            // textBox3
+            // txtClienteNome
             // 
-            textBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(209, 93);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(255, 27);
-            textBox3.TabIndex = 1;
+            txtClienteNome.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtClienteNome.Location = new Point(209, 93);
+            txtClienteNome.Name = "txtClienteNome";
+            txtClienteNome.Size = new Size(255, 27);
+            txtClienteNome.TabIndex = 1;
+            txtClienteNome.TextChanged += txtClienteNome_TextChanged;
             // 
             // txtUsuario
             // 
@@ -137,7 +140,8 @@
             txtUsuario.Name = "txtUsuario";
             txtUsuario.ReadOnly = true;
             txtUsuario.Size = new Size(372, 27);
-            txtUsuario.TabIndex = 1;
+            txtUsuario.TabIndex = 3;
+            txtUsuario.TextChanged += txtUsuario_TextChanged;
             // 
             // label3
             // 
@@ -145,7 +149,7 @@
             label3.Location = new Point(34, 44);
             label3.Name = "label3";
             label3.Size = new Size(47, 15);
-            label3.TabIndex = 0;
+            label3.TabIndex = 4;
             label3.Text = "Usuário";
             // 
             // grbItens
@@ -252,7 +256,7 @@
             label7.Location = new Point(339, 42);
             label7.Name = "label7";
             label7.Size = new Size(58, 15);
-            label7.TabIndex = 9;
+            label7.TabIndex = 5;
             label7.Text = "Valor Unit";
             // 
             // label6
@@ -270,7 +274,7 @@
             label5.Location = new Point(22, 42);
             label5.Name = "label5";
             label5.Size = new Size(97, 15);
-            label5.TabIndex = 7;
+            label5.TabIndex = 1;
             label5.Text = "Código de Barras";
             // 
             // txtDescontoItem
@@ -288,7 +292,7 @@
             txtQuantidade.Name = "txtQuantidade";
             txtQuantidade.RightToLeft = RightToLeft.Yes;
             txtQuantidade.Size = new Size(53, 23);
-            txtQuantidade.TabIndex = 3;
+            txtQuantidade.TabIndex = 15;
             txtQuantidade.Text = "1";
             // 
             // txtValorUnit
@@ -296,21 +300,22 @@
             txtValorUnit.Location = new Point(339, 60);
             txtValorUnit.Name = "txtValorUnit";
             txtValorUnit.Size = new Size(59, 23);
-            txtValorUnit.TabIndex = 2;
+            txtValorUnit.TabIndex = 5;
             // 
             // txtCodBar
             // 
             txtCodBar.Location = new Point(22, 60);
             txtCodBar.Name = "txtCodBar";
             txtCodBar.Size = new Size(110, 23);
-            txtCodBar.TabIndex = 0;
+            txtCodBar.TabIndex = 8;
+            txtCodBar.TextChanged += txtCodBar_TextChanged;
             // 
             // txtDescricao
             // 
             txtDescricao.Location = new Point(138, 60);
             txtDescricao.Name = "txtDescricao";
             txtDescricao.Size = new Size(195, 23);
-            txtDescricao.TabIndex = 1;
+            txtDescricao.TabIndex = 15;
             // 
             // btnAddItem
             // 
@@ -320,6 +325,7 @@
             btnAddItem.TabIndex = 5;
             btnAddItem.Text = "A&dicionar";
             btnAddItem.UseVisualStyleBackColor = true;
+            btnAddItem.Click += btnAddItem_Click;
             // 
             // dgvItensPedido
             // 
@@ -332,7 +338,7 @@
             dgvItensPedido.ReadOnly = true;
             dgvItensPedido.RowHeadersVisible = false;
             dgvItensPedido.Size = new Size(620, 173);
-            dgvItensPedido.TabIndex = 0;
+            dgvItensPedido.TabIndex = 16;
             // 
             // clnSeq
             // 
@@ -420,6 +426,7 @@
             txtIdPedido.Name = "txtIdPedido";
             txtIdPedido.Size = new Size(181, 43);
             txtIdPedido.TabIndex = 4;
+            txtIdPedido.TextChanged += txtIdPedido_TextChanged;
             // 
             // txtTotal
             // 
@@ -526,7 +533,7 @@
             Controls.Add(grbIndentificacao);
             Controls.Add(btnFechar);
             Name = "FrmPedidoNovo";
-            Text = "FrmPedidoNovo";
+            Text = "123";
             grbIndentificacao.ResumeLayout(false);
             grbIndentificacao.PerformLayout();
             grbItens.ResumeLayout(false);
@@ -545,7 +552,7 @@
         private Label label2;
         private TextBox txtIdPedido;
         public TextBox txtUsuario;
-        private TextBox textBox3;
+        private TextBox txtClienteNome;
         private Button btnInserePedido;
         private TextBox txtIdCliente;
         private Button btnAddItem;
