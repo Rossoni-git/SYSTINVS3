@@ -25,7 +25,7 @@ namespace SysTINSApp
             CarregarGridCliente();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+       public void button1_Click(object sender, EventArgs e)
         {
             Cliente cliente = new(
 
@@ -87,7 +87,7 @@ namespace SysTINSApp
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+   public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

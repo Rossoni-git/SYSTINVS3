@@ -65,5 +65,22 @@ namespace SysTINSApp
             frmNovocliente.Show();
 
         }
+
+        private void novoToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            FrmPedidoNovo frmPedidoNovo = new();
+            frmPedidoNovo.MdiParent = this;
+            //frmPedidoNovo.txtUsuario.Text = Program.UsuarioLogado.Id + " - " + Program.UsuarioLogado.Nome;
+            frmPedidoNovo.Show();
+        }
+
+        private void novoToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+            FrmEndereco frmendereco = new();
+            frmendereco.MdiParent = this;
+            frmendereco.Show();
+              ;
+        }
     }
 }

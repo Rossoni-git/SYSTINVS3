@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SysTINSClass;
 
 namespace SysTINSApp
 {
@@ -17,28 +18,17 @@ namespace SysTINSApp
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtUsuario_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnInserePedido_Click(object sender, EventArgs e)
         {
-            
+            Pedido pedido = new(
+                Usuario.ObterPorId(Program.UsuarioLogado.Id),
+                Cliente.ObterporId(int.Parse(txtIdCliente.Text))
+                );
+            pedido.Inserir();
+            txtIdPedido.Text = pedido.Id.ToString();
+            grbIndentificacao.Enabled = false;
+            grbItens.Enabled = true;
 
-
-
-            }
         }
     }
 }

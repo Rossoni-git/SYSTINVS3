@@ -117,7 +117,7 @@
             // txtIdCliente
             // 
             txtIdCliente.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtIdCliente.Location = new Point(102, 93);
+            txtIdCliente.Location = new Point(127, 93);
             txtIdCliente.Name = "txtIdCliente";
             txtIdCliente.Size = new Size(78, 27);
             txtIdCliente.TabIndex = 0;
@@ -125,7 +125,7 @@
             // textBox3
             // 
             textBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(186, 93);
+            textBox3.Location = new Point(209, 93);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(255, 27);
             textBox3.TabIndex = 1;
@@ -138,7 +138,6 @@
             txtUsuario.ReadOnly = true;
             txtUsuario.Size = new Size(372, 27);
             txtUsuario.TabIndex = 1;
-            txtUsuario.TextChanged += txtUsuario_TextChanged;
             // 
             // label3
             // 
@@ -545,7 +544,7 @@
         private Label label1;
         private Label label2;
         private TextBox txtIdPedido;
-        private TextBox txtUsuario;
+        public TextBox txtUsuario;
         private TextBox textBox3;
         private Button btnInserePedido;
         private TextBox txtIdCliente;

@@ -289,6 +289,6 @@
         private DataGridViewTextBoxColumn Column8;
         private Label label7;
         private Button btnAtualizar;
-        private ComboBox cmbID;
+        public ComboBox cmbID;
     }
 }
